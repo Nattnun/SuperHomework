@@ -1,4 +1,5 @@
 import { useState } from "react";
+import RegisterForm from "./layouts/RegisterForm";
 
 function App() {
   const [dark, setDark] = useState(false);
@@ -9,7 +10,7 @@ function App() {
   return (
     <div
       className="min-h-screen flex flex-col gp-3"
-      data-theme={dark ? "dark" : "light"}
+      data-theme={dark ? "dark" : "cupcake"}
     >
       <h1 className="text-3xl font-bold underline text-pink-600">
         Hello world!
@@ -24,13 +25,7 @@ function App() {
         }}
       />
       <hr />
-      <button className="btn">Button</button>
-      <button className="btn btn-neutral">Neutral</button>
-      <button className="btn btn-primary">Primary</button>
-      <button className="btn btn-secondary">Secondary</button>
-      <button className="btn btn-accent">Accent</button>
-      <button className="btn btn-ghost">Ghost</button>
-      <button className="btn btn-link">Link</button>
+      <RegisterForm />
     </div>
   );
 }
