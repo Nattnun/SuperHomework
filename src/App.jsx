@@ -1,7 +1,9 @@
 import { useState } from "react";
-import RegisterForm from "./layouts/RegisterForm";
+import LoginForm from "./layouts/LoginForm";
+import useAuth from "./hooks/useAuth";
 
 function App() {
+  const { user, setUser } = useAuth();
   const [dark, setDark] = useState(false);
 
   // const toggle = () => {
@@ -25,7 +27,8 @@ function App() {
         }}
       />
       <hr />
-      <RegisterForm />
+      {/* <RegisterForm /> */}
+      <LoginForm />
     </div>
   );
 }
