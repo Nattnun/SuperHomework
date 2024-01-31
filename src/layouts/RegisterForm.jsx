@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from "axios";
-import { Input } from "postcss";
 
 export default function RegisterForm() {
   const [input, setInput] = useState({
