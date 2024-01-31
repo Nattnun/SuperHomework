@@ -25,6 +25,7 @@ const routerGuest = createBrowserRouter([
     //Navigate is component for redirect
     errorElement: <Navigate to="/login" />,
     children: [
+      //index:true reference to parent route
       { index: true, element: <LoginForm /> },
       //   { path: "/login", element: <LoginForm /> },
       { path: "/register", element: <RegisterForm /> },
