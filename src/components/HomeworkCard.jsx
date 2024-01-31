@@ -1,8 +1,32 @@
+import axios from "axios";
 import React from "react";
 
 export default function HomeworkCard(props) {
-  const { homework, openEdit } = props;
-  const { question, startdate, duedate, published, subject } = homework;
+  const { homework, openEdit, setReload } = props;
+  const { id, question, startdate, duedate, published, subject } = homework;
+
+  const formatDate = (d) => {
+    return new Intl.DateTimeFormat("en-UK", {
+      weekday: "short",
+      year: "numeric",
+      month: "short",
+      day: "2-digit",
+    }).format(d);
+  };
+
+  const hdlDelete = async (e) => {
+    try {
+      e.stopPropagation();
+      const token = localStorage.getItem("token");
+      const rs = await axios.delete(`http://localhost:9999/homework/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setReload((prv) => !prv);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   return (
     <div
       className="card w-5/6 border mx-auto hover:shadow"
@@ -20,11 +44,18 @@ export default function HomeworkCard(props) {
               {!published && "Un"}published
             </small>
           </div>
-          <div className="badge badge-error  badge-outline">Delete</div>
+          <div
+            onClick={hdlDelete}
+            className="badge badge-error  badge-outline cursor-pointer"
+          >
+            Delete
+          </div>
         </div>
         <div className="flex justify-between">
-          <p>start: {startdate.split("T")[0]}</p>
-          <p className="text-right">due date: {duedate.split("T")[0]}</p>
+          <p>start: {formatDate(new Date(startdate))}</p>
+          <p className="text-right">
+            due date: {formatDate(new Date(duedate))}
+          </p>
         </div>
         <p className="text-lg">{question}</p>
       </div>
